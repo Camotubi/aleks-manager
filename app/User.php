@@ -14,6 +14,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public $incrementing = false;
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -26,4 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function loginLogs() {
+        return $this->hasMany('App\LoginLog','student_id','id'); 
+    }
+    public function lastLogin() {
+        $lastLogin =$this->loginLogs()->orderBy('date','desc')->first();
+        if(!is_null($lastLogin)){
+            return $lastLogin->date;
+        }
+        return null;
+    }
 }

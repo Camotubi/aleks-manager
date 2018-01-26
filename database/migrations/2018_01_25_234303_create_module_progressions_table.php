@@ -18,14 +18,13 @@ class CreateModuleProgressionsTable extends Migration
             $table->string('student_id');
             $table->foreign('student_id')->references('id')->on('users');
             $table->date('recorded_at');
-            $table->date('last_login');
             $table->timestamps();
-            $table->integer('module_name');	
-            $table->integer('initial_mastery');
-            $table->integer('current_mastery');
-            $table->integer('current_number_of_topic_learned');
+            $table->string('module_name');	
+            $table->double('initial_mastery',8,2);
+            $table->double('current_mastery',8,2);
+            $table->double('current_number_of_topic_learned',8,2);
             $table->integer('current_total_number_of_topic_learned_per_hour');
-            $table->integer('current_total_time_spent_in_aleks');
+            $table->time('current_total_time_spent_in_aleks',8,2);
     });
 }
 
