@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/long_time', function () {
+    $student = App\Student::find('123');
+
+    return new App\Mail\LongTimeWithoutLogin($student);
+});

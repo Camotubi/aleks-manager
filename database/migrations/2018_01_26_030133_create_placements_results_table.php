@@ -17,7 +17,7 @@ class CreatePlacementsResultsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('student_id');
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->integer('placement_assestment_number');
             $table->integer('total_number_of_placements_taken');
             $table->date('start_date');
@@ -26,7 +26,7 @@ class CreatePlacementsResultsTable extends Migration
             $table->time('end_time');
             $table->string('proctored_assestment');
             $table->time('time_in_placements');
-            $table->double('placement_result',8,2);
+            $table->decimal('placement_result',18,13);
         });
     }
 
