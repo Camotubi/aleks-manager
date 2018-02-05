@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlacementsResultsTable extends Migration
+class CreatePlacementResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePlacementsResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('placements_results', function (Blueprint $table) {
+        Schema::create('placement_results', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->string('student_id');

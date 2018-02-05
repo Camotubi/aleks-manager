@@ -14,6 +14,7 @@ class CreateModuleProgressionsTable extends Migration
     public function up()
     {
         Schema::create('module_progressions', function (Blueprint $table) {
+          $table->increments('id');
             $table->timestamps();
             $table->string('student_id');
             $table->foreign('student_id')->references('id')->on('students');
@@ -22,7 +23,7 @@ class CreateModuleProgressionsTable extends Migration
             $table->decimal('current_mastery',18,13);
             $table->integer('current_number_of_topics_learned')->unsigned();
             $table->decimal('current_number_of_topics_learned_per_hour',18,13)->nullable();
-            $table->time('current_total_time_in_aleks_prep');
+            $table->integer('current_total_time_in_aleks_prep')->unsigned();
     });
 }
 

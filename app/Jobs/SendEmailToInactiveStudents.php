@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LongTimeWithoutLogin;
 use App\Student;
-class SendEmailIfLoginLow implements ShouldQueue
+class SendEmailToInactiveStudents implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
