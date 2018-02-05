@@ -8,7 +8,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Log;
-use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LongTimeWithoutLogin;
+use App\Student;
 class SendEmailIfLoginLow implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -20,7 +22,7 @@ class SendEmailIfLoginLow implements ShouldQueue
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
@@ -30,14 +32,17 @@ class SendEmailIfLoginLow implements ShouldQueue
      */
     public function handle()
     {
-        $users = User::all();
-        $lowUsageUser = collect();
-        foreach ($users as $user)
+        Log::info('Looking for inactive Students...');
+        $students = Student::all();
+        $inactiveStudents = collect();
+        foreach ($students as $student)
         {
-            $daysSinceLogin = (time() - strtotime($user->lastLogin()))/(60*60*24);
+            $daysSinceLogin = (time() - strtotime($student->lastLogin()))/(60*60*24);
             if($daysSinceLogin > 5)
             {
-                Log::info('Sending email to student '. $user->name.'. Reason: '.$daysSinceLogin.' days without login in.');
+                Log::info('Sending email to student '. $student->name.'. Reason: '.$daysSinceLogin.' days without login in.');
+                Mail::to($student->email)->send(new LongTimeWithoutLogin($student));
+                //$inactiveStudents->push($student);
             }
         }
  
