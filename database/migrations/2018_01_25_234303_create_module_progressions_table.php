@@ -14,17 +14,15 @@ class CreateModuleProgressionsTable extends Migration
     public function up()
     {
         Schema::create('module_progressions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('student_id');
-            $table->foreign('student_id')->references('id')->on('users');
-            $table->date('recorded_at');
             $table->timestamps();
-            $table->string('module_name');	
-            $table->double('initial_mastery',8,2);
-            $table->double('current_mastery',8,2);
-            $table->double('current_number_of_topic_learned',8,2);
-            $table->integer('current_total_number_of_topic_learned_per_hour');
-            $table->time('current_total_time_spent_in_aleks',8,2);
+            $table->string('student_id');
+            $table->foreign('student_id')->references('id')->on('students');
+            $table->string('prep_and_learning_module');
+            $table->decimal('initial_mastery',18,13);
+            $table->decimal('current_mastery',18,13);
+            $table->integer('current_number_of_topics_learned')->unsigned();
+            $table->decimal('current_number_of_topics_learned_per_hour',18,13)->nullable();
+            $table->time('current_total_time_in_aleks_prep');
     });
 }
 
