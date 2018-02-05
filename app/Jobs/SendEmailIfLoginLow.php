@@ -8,6 +8,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 use App\User;
 class SendEmailIfLoginLow implements ShouldQueue
 {
@@ -32,6 +34,7 @@ class SendEmailIfLoginLow implements ShouldQueue
     {
         $users = User::all();
         $lowUsageUser = collect();
+//        Mail::to('from@example.com')->send(new TestMail());
         foreach ($users as $user)
         {
             $daysSinceLogin = (time() - strtotime($user->lastLogin()))/(60*60*24);

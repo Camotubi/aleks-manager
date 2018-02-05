@@ -20,9 +20,9 @@ class CreateModuleProgressionsTable extends Migration
             $table->date('recorded_at');
             $table->timestamps();
             $table->string('module_name');	
-            $table->double('initial_mastery',8,2);
-            $table->double('current_mastery',8,2);
-            $table->double('current_number_of_topic_learned',8,2);
+            $table->decimal('initial_mastery',8,2);
+            $table->decimal('current_mastery',8,2);
+            $table->decimal('current_number_of_topic_learned',8,2);
             $table->integer('current_total_number_of_topic_learned_per_hour');
             $table->time('current_total_time_spent_in_aleks',8,2);
     });
