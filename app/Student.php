@@ -10,6 +10,10 @@ class Student extends Model
      protected $casts = [
         'id' => 'string',
     ];
+    public function extra()
+    {
+      return $this->hasOne('App\StudentExtras');
+    }
     public function loginLogs() {
         return $this->hasMany('App\LoginLog','student_id','id'); 
     }
