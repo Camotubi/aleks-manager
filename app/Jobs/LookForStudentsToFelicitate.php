@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LongTimeWithoutLogin;
 use App\Student;
-class SendEmailToInactiveStudents implements ShouldQueue
+class LookForStudentsToFelicitate implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -32,7 +32,7 @@ class SendEmailToInactiveStudents implements ShouldQueue
      */
     public function handle()
     {
-        Log::info('Looking for inactive Students...');
+        Log::info('Looking for Students to Felicitate...');
         $students = Student::all();
         $inactiveStudents = collect();
         foreach ($students as $student)
