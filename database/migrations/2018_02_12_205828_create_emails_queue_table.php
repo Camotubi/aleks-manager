@@ -18,7 +18,7 @@ class CreateEmailsQueueTable extends Migration
             $table->string('student_id');
             $table->foreign('student_id')->references('id')->on('students');
             $table->string('email_type');
-            $table->date('execution_date');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
