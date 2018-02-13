@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LongTimeWithoutLogin;
 use App\Student;
@@ -34,16 +35,31 @@ class LookForInactiveStudents implements ShouldQueue
     {
         Log::info('Looking for inactive Students...');
         $students = Student::all();
-        $inactiveStudents = collect();
+        $inactiveStudents = array();
         foreach ($students as $student)
         {
-            $daysSinceLogin = (time() - strtotime($student->lastLogin()))/(60*60*24);
-            if($daysSinceLogin > 5)
+            $daysSinceLastLoginCheck = ((time() - strtotime($student->extra()->lastActivityCheckDate))/(60*60*24));
+            if($daysSinceLastLoginCheck > 5)
             {
-                Log::info('Sending email to student '. $student->name.'. Reason: '.$daysSinceLogin.' days without login in.');
-                Mail::to($student->email)->send(new LongTimeWithoutLogin($student));
+                if($student->daysSinceLogin() > 5)
+                {
+                    $inactiveStudents = array_push(
+                        $inactiveStudents,
+                        [
+                            "student_id" => $student->id,
+                            "email_type" => "inactivityEmail", 
+                            "created_at" => date("Y-m-d H:i:s")
+                        ]
+                    );
+                }
             }
+            $student->extra()->update(["lastActivityCheckDate" => date("Y-m-s")]);
         }
+        foreach(array_chunk($inactiveStudents,500) as $inactiveStudentsChunk)
+        {
+            DB::table('emails_queue')->insert($inactiveStudentsChunk);
+        }
+
  
     }
 }
