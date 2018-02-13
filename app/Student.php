@@ -27,4 +27,9 @@ class Student extends Model
     public function moduleProgressions() {
         return  $this->hasMany('App\ModuleProgression','student_id','id'); 
     }
+
+    public function daysSinceLogin()
+    {
+                return (time() - strtotime($this->lastLogin()))/(60*60*24);
+    }
 }
