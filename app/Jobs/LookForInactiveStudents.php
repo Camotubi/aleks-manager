@@ -54,7 +54,7 @@ class LookForInactiveStudents implements ShouldQueue
                     );
                 }
             }
-            $student->extra()->update(["lastActivityCheckDate" => date("Y-m-s")]);
+            $student->extra()->update(["lastActivityCheckDate" => date("Y-m-d")]);
         }
         foreach(array_chunk($inactiveStudents,500) as $inactiveStudentsChunk)
         {
