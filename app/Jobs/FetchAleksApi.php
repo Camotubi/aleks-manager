@@ -61,6 +61,8 @@ class FetchAleksApi implements ShouldQueue
                 $student->save();
                 $student->extra()->save(new StudentExtras());
             }
+
+
             $loginLog = new LoginLog();
             $loginLog -> student_id = $student -> id;
             $loginLog -> date = date('Y-m-d', strtotime($studentPlacement["Last login"]));
@@ -84,10 +86,11 @@ class FetchAleksApi implements ShouldQueue
             $moduleProgression -> current_mastery = substr($studentPlacement["Current Mastery %"],0,-1);
             $moduleProgression -> current_number_of_topics_learned = $studentPlacement["Total Number of Topics Learned"];
             $moduleProgression -> current_number_of_topics_learned_per_hour= $studentPlacement["Total Number of Topics Learned per Hour"];
-            $moduleProgression -> current_total_time_in_aleks_prep = time('h:i:s',strtotime($studentPlacement["Total Hours in ALEKS Prep"]));
+            $moduleProgression -> current_total_hours_in_aleks_prep = $studentPlacement["Total Hours in ALEKS Prep"];
             $moduleProgression -> save(); 
 
         }
 
     }
+
 }

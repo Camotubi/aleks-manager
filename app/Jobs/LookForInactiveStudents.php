@@ -38,12 +38,13 @@ class LookForInactiveStudents implements ShouldQueue
         $inactiveStudents = array();
         foreach ($students as $student)
         {
-            $daysSinceLastLoginCheck = ((time() - strtotime($student->extra()->lastActivityCheckDate))/(60*60*24));
+            $daysSinceLastLoginCheck = ((time() - strtotime($student->extra()->first()->lastActivityCheckDate))/(60*60*24));
+            Log::info($daysSinceLastLoginCheck);
             if($daysSinceLastLoginCheck > 5)
             {
                 if($student->daysSinceLogin() > 5)
                 {
-                    $inactiveStudents = array_push(
+                    array_push(
                         $inactiveStudents,
                         [
                             "student_id" => $student->id,
