@@ -23,7 +23,7 @@ class CreateModuleProgressionsTable extends Migration
             $table->decimal('current_mastery',18,13);
             $table->integer('current_number_of_topics_learned')->unsigned();
             $table->decimal('current_number_of_topics_learned_per_hour',18,13)->nullable();
-            $table->integer('current_total_time_in_aleks_prep')->unsigned();
+            $table->decimal('current_total_hours_in_aleks_prep',18,13)->unsigned();
     });
 }
 
