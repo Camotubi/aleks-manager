@@ -28,6 +28,17 @@ class Student extends Model
         return  $this->hasMany('App\ModuleProgression','student_id','id'); 
     }
 
+    public function isFelicitable() {
+      if($this->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour >= 2.5)
+        return true;
+      else
+        return false;
+    }
+
+    public function isAdjudicable() {
+      return !$this->isFelicitable();
+    }
+
     public function daysSinceLogin()
     {
                 return (time() - strtotime($this->lastLogin()))/(60*60*24);
