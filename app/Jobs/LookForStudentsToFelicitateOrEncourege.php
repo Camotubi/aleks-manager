@@ -9,7 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\LongTimeWithoutLogin;
+use App\Mail\Encourege;
+use App\Mail\Felicitate;
 use App\Student;
 class LookForStudentsToFelicitateOrEncourege implements ShouldQueue
 {
@@ -33,22 +34,18 @@ class LookForStudentsToFelicitateOrEncourege implements ShouldQueue
     public function handle()
     {
         Log::info('Looking for Students to Felicitate or Encourege...');
-        $students = Student::oldest();
-        $students = Student::join('students_extras',
-          'students_extras.student_id',
-          '=',
-          'students.id')
-          ->oldest('lastActivityCheckDate')
-          ->limit(100)
-          ->get();
+        $students = Student::all();
           foreach ($students as $student) {
-            $daysSinceLastProgressCheck = (time() - strtotime($student->extra()->lastProgressCheckDate()))/(60*60*24); 
-            if($daysSinceLastProgressCheck > 5)
-            {
-              Log::info('Sending email to student '. $student->name.'. Reason: '.$daysSinceLogin.' days without login in.');
-              Mail::to($student->email)->send(new LongTimeWithoutLogin($student));
-                //$inactiveStudents->push($student);
-            }
+              if($student->isFelicitable())
+              {
+                  Log::info('Sending felicitation email to '.$student->name);
+                  Mail::to($student->email)->send(new Felicitate($student));
+              }
+              else
+              {
+                  Log::info('Sending Encourege email to '.$student->name);
+                  Mail::to($student->email)->send(new Encourege($student));
+              }
         }
  
     }

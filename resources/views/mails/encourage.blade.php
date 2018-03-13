@@ -15,9 +15,9 @@
                                     nombre
                                 @endif
                                 ,</p>
-                            <p>Hemos notado que llevas un rato sin utilizar la plataforma de Aleks. La constancia es la llave hacia el progreso.</p>
+                            <p>Hemos notado que no has avanzado mucho en los modulos de aprendisaje. Esta herramienta te sera de mucha utilidad en tus proximos cursos en el area de matemática, Aprovechala.</p>
                             @if($student->moduleProgressions()->exists()))
-                                <p>Hablando de progreso, aqui tenemos un par de estadisticas sobre tu progreso.</p>
+                                <p>Hablando de tu avance, aqui tenemos un par de estadisticas sobre tu progreso.</p>
                                 <br>
                                 <br>
                                 <table class="table">

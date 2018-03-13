@@ -38,10 +38,13 @@ class LookForInactiveStudents implements ShouldQueue
         $inactiveStudents = array();
         foreach ($students as $student)
         {
+            /*
+             *
             $daysSinceLastLoginCheck = ((time() - strtotime($student->extra()->first()->lastActivityCheckDate))/(60*60*24));
             Log::info($daysSinceLastLoginCheck);
             if($daysSinceLastLoginCheck > 5)
             {
+             */
                 if($student->daysSinceLogin() > 5)
                 {
                     array_push(
@@ -52,8 +55,10 @@ class LookForInactiveStudents implements ShouldQueue
                             "created_at" => date("Y-m-d H:i:s")
                         ]
                     );
+                    Log::info('Sending email to student '. $student->name.'. Reason: '.$student->daysSinceLogin().' days without login in.');
+                    Mail::to($student->email)->send(new LongTimeWithoutLogin($student));
                 }
-            }
+            //}
             $student->extra()->update(["lastActivityCheckDate" => date("Y-m-d")]);
         }
         foreach(array_chunk($inactiveStudents,500) as $inactiveStudentsChunk)
