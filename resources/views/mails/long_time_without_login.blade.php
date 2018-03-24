@@ -20,7 +20,7 @@
                                 <p>Hablando de progreso, aqui tenemos un par de estadisticas sobre tu progreso.</p>
                                 <br>
                                 <br>
-                                <table class="table">
+                                <table style="border: 1px solid black;">
                                     <tr>
                                         <th>Modulo</th>
                                         <th>Dominio Inicial</th>
@@ -30,10 +30,10 @@
                                     </tr>
                                     <tr>
                                         <td>{{$student->moduleProgressions()->latest()->first()->prep_and_learning_module}}</td>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->initial_mastery}}</td>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->current_mastery}}</td>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->current_number_of_topics_learned}}</td>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour}}</td>
+                                        <td>{{round($student->moduleProgressions()->latest()->first()->initial_mastery,2)}}</td>
+                                        <td>{{round($student->moduleProgressions()->latest()->first()->current_mastery,2)}}</td>
+                                        <td>{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned,2)}}</td>
+                                        <td>{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour,2)}}</td>
                                     </tr>
                                 </table>
                             @endif
@@ -44,6 +44,7 @@
         </td>
     </tr>
 </table> 
+<a href="{{$student -> emailOptOutLink}}">No quiero recibir mas correos</a>
     </div>
 @endsection
 
