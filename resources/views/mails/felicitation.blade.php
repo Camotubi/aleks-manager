@@ -4,7 +4,7 @@
         <div class="mail-container columns is-vcentered">
             <table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td align="center">
+                    <td>
                         <div class="mail-content column " style="
                             color:rgb(84, 165, 218);
                             ">
@@ -14,26 +14,26 @@
                                 @else
                                     nombre
                                 @endif
-                                ,</p>
+                                ;</p>
                             <p>Queriamos felicitarte ya que has avanzado a buen paso en los temas de aprendisaje, sigue asi.</p>
-                            @if($student->moduleProgressions()->exists()))
+                            @if($student->moduleProgressions()->exists())
                                 <p>Hablando de tu avance, aqui tenemos un par de estadisticas sobre tu progreso.</p>
                                 <br>
                                 <br>
-                                <table class="table">
+                                <table style=" border-collapse: collapse;">
                                     <tr>
-                                        <th>Modulo</th>
-                                        <th>Dominio Inicial</th>
-                                        <th>Dominio Actual</th>
-                                        <th>Total de Topicos Aprendidos</th>
-                                        <th>Total de Topicos Aprendidos por hora</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;">Modulo</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;">Dominio Inicial</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;">Dominio Actual</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;">Total de Topicos Aprendidos</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;">Total de Topicos Aprendidos por hora</th>
                                     </tr>
                                     <tr>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->prep_and_learning_module}}</td>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->initial_mastery}}</td>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->current_mastery}}</td>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->current_number_of_topics_learned}}</td>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;">{{$student->moduleProgressions()->latest()->first()->prep_and_learning_module}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;">{{round($student->moduleProgressions()->latest()->first()->initial_mastery,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;">{{round($student->moduleProgressions()->latest()->first()->current_mastery,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;">{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;">{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour,2)}}</td>
                                     </tr>
                                 </table>
                             @endif

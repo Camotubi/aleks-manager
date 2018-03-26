@@ -4,7 +4,7 @@
         <div class="mail-container columns is-vcentered">
             <table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td align="center">
+                    <td>
                         <div class="mail-content column " style="
                             color:rgb(84, 165, 218);
                             ">
@@ -14,26 +14,26 @@
                                 @else
                                     nombre
                                 @endif
-                                ,</p>
+                                ;</p>
                             <p>Hemos notado que llevas un rato sin utilizar la plataforma de Aleks. La constancia es la llave hacia el progreso.</p>
-                            @if($student->moduleProgressions()->exists()))
+                            @if($student->moduleProgressions()->exists())
                                 <p>Hablando de progreso, aqui tenemos un par de estadisticas sobre tu progreso.</p>
                                 <br>
                                 <br>
-                                <table style="border: 1px solid black;">
+                                <table style=" border-collapse: collapse;">
                                     <tr>
-                                        <th>Modulo</th>
-                                        <th>Dominio Inicial</th>
-                                        <th>Dominio Actual</th>
-                                        <th>Total de Topicos Aprendidos</th>
-                                        <th>Total de Topicos Aprendidos por hora</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Modulo</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Dominio Inicial</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Dominio Actual</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Total de Topicos Aprendidos</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Total de Topicos Aprendidos por hora</th>
                                     </tr>
                                     <tr>
-                                        <td>{{$student->moduleProgressions()->latest()->first()->prep_and_learning_module}}</td>
-                                        <td>{{round($student->moduleProgressions()->latest()->first()->initial_mastery,2)}}</td>
-                                        <td>{{round($student->moduleProgressions()->latest()->first()->current_mastery,2)}}</td>
-                                        <td>{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned,2)}}</td>
-                                        <td>{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{$student->moduleProgressions()->latest()->first()->prep_and_learning_module}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{round($student->moduleProgressions()->latest()->first()->initial_mastery,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{round($student->moduleProgressions()->latest()->first()->current_mastery,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour,2)}}</td>
                                     </tr>
                                 </table>
                             @endif
@@ -44,7 +44,6 @@
         </td>
     </tr>
 </table> 
-<a href="{{$student -> emailOptOutLink}}">No quiero recibir mas correos</a>
     </div>
 @endsection
 
