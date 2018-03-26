@@ -22,18 +22,18 @@
                                 <br>
                                 <table style=" border-collapse: collapse;">
                                     <tr>
-                                        <th style="background-color:#4B0082;color:white;text-align: left;">Modulo</th>
-                                        <th style="background-color:#4B0082;color:white;text-align: left;">Dominio Inicial</th>
-                                        <th style="background-color:#4B0082;color:white;text-align: left;">Dominio Actual</th>
-                                        <th style="background-color:#4B0082;color:white;text-align: left;">Total de Topicos Aprendidos</th>
-                                        <th style="background-color:#4B0082;color:white;text-align: left;">Total de Topicos Aprendidos por hora</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Modulo</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Dominio Inicial</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Dominio Actual</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Total de Topicos Aprendidos</th>
+                                        <th style="background-color:#4B0082;color:white;text-align: left;padding: 8px;">Total de Topicos Aprendidos por hora</th>
                                     </tr>
                                     <tr>
-                                        <td style="background-color: #f2f2f2;text-align: left;">{{$student->moduleProgressions()->latest()->first()->prep_and_learning_module}}</td>
-                                        <td style="background-color: #f2f2f2;text-align: left;">{{round($student->moduleProgressions()->latest()->first()->initial_mastery,2)}}</td>
-                                        <td style="background-color: #f2f2f2;text-align: left;">{{round($student->moduleProgressions()->latest()->first()->current_mastery,2)}}</td>
-                                        <td style="background-color: #f2f2f2;text-align: left;">{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned,2)}}</td>
-                                        <td style="background-color: #f2f2f2;text-align: left;">{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{$student->moduleProgressions()->latest()->first()->prep_and_learning_module}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{round($student->moduleProgressions()->latest()->first()->initial_mastery,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{round($student->moduleProgressions()->latest()->first()->current_mastery,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned,2)}}</td>
+                                        <td style="background-color: #f2f2f2;text-align: left;padding: 8px;">{{round($student->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour,2)}}</td>
                                     </tr>
                                 </table>
                             @endif
