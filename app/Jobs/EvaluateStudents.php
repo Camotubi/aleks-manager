@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Encourege;
 use App\Mail\Felicitate;
 use App\Student;
-class LookForStudentsToFelicitateOrEncourege implements ShouldQueue
+class EvaluateStudentProgress implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -36,15 +36,21 @@ class LookForStudentsToFelicitateOrEncourege implements ShouldQueue
         Log::info('Looking for Students to Felicitate or Encourege...');
         $students = Student::all();
           foreach ($students as $student) {
-              if($student->isFelicitable())
+              if($student->progressSinceLastWeek() >= 10)
               {
                   Log::info('Sending felicitation email to '.$student->name);
                   Mail::to($student->email)->send(new Felicitate($student));
               }
               else
-              {
-                  Log::info('Sending Encourege email to '.$student->name);
-                  Mail::to($student->email)->send(new Encourege($student));
+	      {
+		      if($student->progressSinceLastWeek() >= 1 && $student->progressSinceLastWeek() < 10) {
+			      Log::info('Sending Encourege email to '.$student->name);
+			      Mail::to($student->email)->send(new Encourege($student));
+		      }
+		      else {
+			      Log::info('Sending No Progress Email email to '.$student->name);
+			      Mail::to($student->email)->send(new NoProgress($student));
+		      }
               }
         }
  
