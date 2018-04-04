@@ -10,6 +10,11 @@ class Student extends Model
      protected $casts = [
         'id' => 'string',
     ];
+    public function getFirstNameAttribute($value) {
+	    $sepPos = strpos($this ->name,",");
+	    $firstName = trim(substr($this ->name,$sepPos+1)); 
+	return ucfirst($firstName);
+    }
     public function extra()
     {
       return $this->hasOne('App\StudentExtras');
