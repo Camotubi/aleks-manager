@@ -48,14 +48,23 @@ class Student extends Model
     {
                 return (time() - strtotime($this->lastLogin()))/(60*60*24);
     }
+
+    private function progressDifference($progressLater, $progressOlder) {
+        return 
+            $progressLater->current_number_of_topics_learned 
+            * 
+            (1 - ($progressOlder->current_mastery / $progressLater->current_mastery));
+    }
     public function progressSinceLastWeek() {
-	    $studentProgression = $this ->moduleProgressions()
-		    ->latest() ->limit(2) ->get();
-	    $deltaTopicLearned = 
-		    $studentProgression->first()->current_number_of_topics_learned 
-		    * 
-		    (1 - ($studentProgression->last()-> current_mastery / $studentProgression ->first() ->current_mastery));
-	    return $deltaTopicLearned;
+        $studentCurrentProgress = $this->moduleProgressions()->latest()->first();
+        $studentPreviousWeekProgress = $this->moduleProgressions()
+            ->where('created_at','<=', date(
+                'Y-m-d',
+                strtotime('-1 weeks',strtotime($studentCurrentProgress->created_at))
+            ))
+            ->latest()
+            ->first();
+	    return progressDifference($studentCurrentProgress,$studentPreviousWeekProgress);
 
     }
 }
