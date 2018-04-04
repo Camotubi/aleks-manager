@@ -48,4 +48,14 @@ class Student extends Model
     {
                 return (time() - strtotime($this->lastLogin()))/(60*60*24);
     }
+    public function progressSinceLastWeek() {
+	    $studentProgression = $this ->moduleProgressions()
+		    ->latest() ->limit(2) ->get();
+	    $deltaTopicLearned = 
+		    $studentProgression->first()->current_number_of_topics_learned 
+		    * 
+		    (1 - ($studentProgression->last()-> current_mastery / $studentProgression ->first() ->current_mastery));
+	    return $deltaTopicLearned;
+
+    }
 }
