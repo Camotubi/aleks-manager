@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Felicitate extends Mailable
+class NoProgress extends Mailable
 {
     use Queueable, SerializesModels;
 
