@@ -26,6 +26,14 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+	    $schedule->job(new \App\Jobs\EvaluateStudentsProgress())
+		    ->weekly()
+		    ->wednesdays()
+		    ->at('7:00');
+	    $schedule->job(new \App\Jobs\FetchAleksApi())
+		    ->weekly()
+		    ->mondays()
+		    ->at('20:00');
     }
 
     /**
