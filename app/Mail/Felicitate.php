@@ -16,7 +16,7 @@ class Felicitate extends Mailable
      *
      * @return void
      */
-    public $user;
+    public $student;
 
     public function __construct(Student $student)
     {
@@ -30,6 +30,6 @@ class Felicitate extends Mailable
      */
     public function build()
     {
-        return $this->from('from@example.com')->view('mails.felicitation')->with(["student" => $this->student]);
+        return $this->from('mg@utpaleks.com')->subject('Retroalimentación Semanal | UTP-Aleks PPL')->view('mails.felicitation')->with(["student" => $this->student]);
     }
 }

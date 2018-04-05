@@ -18,6 +18,8 @@ class FetchAleksApi implements ShouldQueue
 {
 	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+	public $timeout = 500;
+	public $tries = 10;
 	/**
 	 * Create a new job instance.
 	 *
@@ -25,7 +27,6 @@ class FetchAleksApi implements ShouldQueue
 	 */
 	public function __construct()
 	{
-		//
 	}
 
 	/**
