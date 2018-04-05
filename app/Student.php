@@ -12,8 +12,8 @@ class Student extends Model
     ];
     public function getFirstNameAttribute($value) {
         $sepPos = strpos($this ->name,",");
-        $firstName = trim(substr($this ->name,$sepPos+1)); 
-        return ucfirst($firstName);
+        $firstName = trim(substr($this->name,$sepPos+1)); 
+        return ucfirst(strtolower($firstName));
     }
     public function extra()
     {
@@ -61,12 +61,12 @@ class Student extends Model
             ->where([
                 ['prep_and_learning_module','=',$studentCurrentProgress->prep_and_learning_module],
                 ['created_at','<=',date('Y-m-d',strtotime('-1 weeks',strtotime($studentCurrentProgress->created_at)))],
-            )
+	])
             ->latest()
             ->first();
         if($studentPreviousWeekProgress === null)
             return -1;
-        return progressDifference($studentCurrentProgress,$studentPreviousWeekProgress);
+        return $this->progressDifference($studentCurrentProgress,$studentPreviousWeekProgress);
 
     }
 }
