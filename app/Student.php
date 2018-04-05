@@ -58,13 +58,15 @@ class Student extends Model
     public function progressSinceLastWeek() {
         $studentCurrentProgress = $this->moduleProgressions()->latest()->first();
         $studentPreviousWeekProgress = $this->moduleProgressions()
-            ->where('created_at','<=', date(
-                'Y-m-d',
-                strtotime('-1 weeks',strtotime($studentCurrentProgress->created_at))
-            ))
+            ->where([
+                ['prep_and_learning_module','=',$studentCurrentProgress->prep_and_learning_module],
+                ['created_at','<=',date('Y-m-d',strtotime('-1 weeks',strtotime($studentCurrentProgress->created_at)))],
+            )
             ->latest()
             ->first();
-	    return progressDifference($studentCurrentProgress,$studentPreviousWeekProgress);
+        if($studentPreviousWeekProgress === null)
+            return -1;
+        return progressDifference($studentCurrentProgress,$studentPreviousWeekProgress);
 
     }
 }
