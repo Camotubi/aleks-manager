@@ -6,7 +6,7 @@
 				<tr>
 					<td>
 						<div class="mail-content column ">
-							<p>Hola <strong>@if(isset($student->name)){{$student->name}}@else nombre @endif</strong>,</p>
+							<p>Hola <strong>@if(isset($student->first_name)){{$student->first_name}}@else nombre @endif</strong>,</p>
 							<p>Hemos notado que esta semana no has tenido ningún avance dentro tu Módulo de Preparación. Recuerda que el esfuerzo que dediques ahora a ALEKS te ayudará después en tus cursos de matemáticas en la UTP. Aprovecha la herramienta que se te ha brindado.</p>
 							<p>La constancia es la llave hacia el progreso.</p>
 							<p>Atentamente,</p>
