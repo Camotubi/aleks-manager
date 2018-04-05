@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     public $incrementing = false;
-     protected $casts = [
+    protected $casts = [
         'id' => 'string',
     ];
     public function getFirstNameAttribute($value) {
-	    $sepPos = strpos($this ->name,",");
-	    $firstName = trim(substr($this ->name,$sepPos+1)); 
-	return ucfirst($firstName);
+        $sepPos = strpos($this ->name,",");
+        $firstName = trim(substr($this ->name,$sepPos+1)); 
+        return ucfirst($firstName);
     }
     public function extra()
     {
-      return $this->hasOne('App\StudentExtras');
+        return $this->hasOne('App\StudentExtras');
     }
     public function loginLogs() {
         return $this->hasMany('App\LoginLog','student_id','id'); 
@@ -34,19 +34,19 @@ class Student extends Model
     }
 
     public function isFelicitable() {
-      if($this->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour >= 2.5)
-        return true;
-      else
-        return false;
+        if($this->moduleProgressions()->latest()->first()->current_number_of_topics_learned_per_hour >= 2.5)
+            return true;
+        else
+            return false;
     }
 
     public function isAdjudicable() {
-      return !$this->isFelicitable();
+        return !$this->isFelicitable();
     }
 
     public function daysSinceLogin()
     {
-                return (time() - strtotime($this->lastLogin()))/(60*60*24);
+        return (time() - strtotime($this->lastLogin()))/(60*60*24);
     }
 
     private function progressDifference($progressLater, $progressOlder) {
