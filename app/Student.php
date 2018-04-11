@@ -50,8 +50,10 @@ class Student extends Model
     }
 
     private function progressDifference($progressLater, $progressOlder) {
-        return 
-            $progressLater->current_number_of_topics_learned 
+        if($progressLater->current_mastery == 0) 
+            return $progressLater->current_number_of_topics_learned;
+        else
+            return $progressLater->current_number_of_topics_learned 
             * 
             (1 - ($progressOlder->current_mastery / $progressLater->current_mastery));
     }
