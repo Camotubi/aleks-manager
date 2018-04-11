@@ -37,7 +37,7 @@ class EvaluateStudentsProgress implements ShouldQueue
 	public function handle()
 	{
 		Log::info('Looking for Students to Felicitate or Encourege...');
-		$students = Student::all();
+		$students = Student::where('email_enabled',1)->get();
 		foreach ($students as $student) {
             Log::info('Evaluating Student with id:'. $student->id);
 			if($student->progressSinceLastWeek() == -1)
