@@ -50,12 +50,7 @@ class Student extends Model
     }
 
     private function progressDifference($progressLater, $progressOlder) {
-        if($progressLater->current_mastery == 0) 
-            return $progressLater->current_number_of_topics_learned;
-        else
-            return $progressLater->current_number_of_topics_learned 
-            * 
-            (1 - ($progressOlder->current_mastery / $progressLater->current_mastery));
+	    return $progressOlder->current_number_of_topics_learned - $progressLater->current_number_of_topics_learned;
     }
     public function progressSinceLastWeek() {
         $studentCurrentProgress = $this->moduleProgressions()->latest()->first();
