@@ -14,6 +14,7 @@ use App\Mail\Felicitate;
 use App\Mail\NewModule;
 use App\Mail\NoProgress;
 use App\Student;
+use Carbon\Carbon;
 class EvaluateStudentsProgress implements ShouldQueue
 {
 	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -37,7 +38,18 @@ class EvaluateStudentsProgress implements ShouldQueue
 	public function handle()
 	{
 		Log::info('Looking for Students to Felicitate or Encourege...');
-		$students = Student::where('email_enabled',1)->get();
+		$students = Student::where('email_enabled',true)
+			->whereHas('moduleProgressions',function($query){
+				$query->latest()->where([
+					['current_number_of_topics_learned','>',10],
+					[function($query) {
+						$query->latest()
+							->where(DB::Raw('DATE_ADD(`students`.`created_at`, INTERVAL 6 MONTH)'),
+								'>',
+								Carbon::now());
+					}]
+				]);
+			})->get(); 
 		foreach ($students as $student) {
             Log::info('Evaluating Student with id:'. $student->id);
 			if($student->progressSinceLastWeek() == -1)
