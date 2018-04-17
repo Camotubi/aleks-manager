@@ -57,7 +57,7 @@ class Student extends Model
         $studentPreviousWeekProgress = $this->moduleProgressions()
             ->where([
                 ['prep_and_learning_module','=',$studentCurrentProgress->prep_and_learning_module],
-                ['created_at','<=',date('Y-m-d',strtotime('-1 weeks',strtotime($studentCurrentProgress->created_at)))],
+                ['created_at','<=',date('Y-m-d',strtotime('-6 days',strtotime($studentCurrentProgress->created_at)))],
 	])
             ->latest()
             ->first();

@@ -70,7 +70,7 @@ class FetchAleksApi implements ShouldQueue
 				if(
 					is_null($studentLastProgress)
 				       	||
-					((strtotime(date("Y-m-d"))-strtotime($studentLastProgress->created_at))/(3600*24)>6)
+					((strtotime(date("Y-m-d"))-strtotime($studentLastProgress->created_at))/(3600*24)>=4)
 				) {
 
 
