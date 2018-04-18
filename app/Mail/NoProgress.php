@@ -18,6 +18,8 @@ class NoProgress extends Mailable
      */
     public $student;
 
+    public $tries = 1;
+
     public function __construct(Student $student)
     {
         $this->student = $student;

@@ -17,6 +17,7 @@ class Felicitate extends Mailable
      * @return void
      */
     public $student;
+    public $tries = 1;
 
     public function __construct(Student $student)
     {
