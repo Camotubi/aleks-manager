@@ -42,7 +42,7 @@ class EvaluateStudentsProgress implements ShouldQueue
 		$students = Student::where('email_enabled',true)
 			->whereHas('moduleProgressions',function($query){
 				$query->latest()->where([
-					['current_number_of_topics_learned','>',10],
+					['current_number_of_topics_learned','<',286],
 					[function($query) {
 						$query->latest()
 							->where(DB::Raw('DATE_ADD(`students`.`created_at`, INTERVAL 6 MONTH)'),
